@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <title>Home Loan Status Prediction</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+     
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url("https://img.freepik.com/free-photo/woman-showing-with-one-hand-mini-house-real-state-concept-ai-generative_123827-24098.jpg?w=900&t=st=1688146449~exp=1688147049~hmac=e592f1a22e530a217ab55d9012114a4916977bc87e0fcc13e20945c15c3bec1e");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    h1 {
+      text-align: center;
+      color: white;
+      
+    }
+   h2{text-align:left;
+       color:white;}
+    
+    nav {
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    nav a:hover {
+      background-color: #45a049;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      top:  -50px
+      position: relative
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      animation: slideIn 1s ease;
+    }
+    
+    #about {
+      display: none; /* Initially hidden */
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 4px;
+      animation: slideIn 1s ease;
+    }
+
+    /* Animation keyframes for slide-in effect */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  .header-input-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .header {
+    margin-right: 10px; /* Adjust the spacing between header and input */
+  }
+
+  </style>
+</head>
+<body>
+ <nav>
+    <a href="#">Home</a>
+    <a href="#aboutbutton" >About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <h1>Home Loan Status Prediction</h1>
+   
+<h1>CHECK YOUR HOME LOAN SANCTION DETAILS</h1>
+<form id="predictionForm" style="text-align: center;" align="center">
+            
+            <fieldset align="center">
+<h2>Gender</h2>
+        <input class = "area" type = "text" id = "gender" >      
+      <h2>married</h2>
+        <input class = "area" type = "text" id = "married" >
+         <h2>Dependents</h2>
+<input class="area" type="text" id="dependents" >
+
+<h2>Education</h2>
+<input class="area" type="text" id="education" >
+
+<h2>Self Employed</h2>
+<input class="area" type="text" id="self_employed" >
+
+<h2>Applicant Income</h2>
+<input class="area" type="text" id="applicationincome" >
+
+<h2>Coapplicant Income</h2>
+<input class="area" type="text" id="coapplicantincome" >
+
+<h2>Loan Amount</h2>
+<input class="area" type="text" id="loanamount" >
+
+<h2>Loan Amount Term</h2>
+<input class="area" type="text" id="loan_amount_term" >
+
+<h2>Credit History</h2>
+<input class="area" type="text" id="credithistory" >
+
+<h2>Property Area</h2>
+<input class="area" type="text" id="propertyarea" >
+<br>
+
+       
+       
+                              <button class="submit" onclick="onclickloanstatus()" type="button">
+            Loan Status
+        </button>
+ <div id="uiEstimatedStatus"><h2>Result</h2></div>
+</form>
+
+  
+  <script type="text/javascript">
+     var jq = jQuery.noConflict();
+    function onclickloanstatus() {
+      var gender = document.getElementById("gender");
+      var married = document.getElementById("married");
+      var dependants = document.getElementById("dependents");
+      var education = document.getElementById("education");
+      var selfEmployed = document.getElementById("self_employed");
+      var applicationIncome = document.getElementById("applicationincome");
+      var coapplicantIncome = document.getElementById("coapplicantincome");
+      var loanAmount = document.getElementById("loanamount");
+      var loanAmountTerm = document.getElementById("loan_amount_term");
+      var creditHistory = document.getElementById("credithistory");
+      var propertyArea = document.getElementById("propertyarea");
+      var eststatus = document.getElementById("uiEstimatedStatus");
+      var url = "http://127.0.0.1:5000/loan_status";
+
+      jq.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          Gdr: parseInt(gender.value),
+          Mrd: parseInt(married.value),
+          dpnts: parseInt(dependants.value),
+          Edc: parseInt(education.value),
+          SE: parseInt(selfEmployed.value),
+          Apinc: parseInt(applicationIncome.value),
+          Coapinc: parseInt(coapplicantIncome.value),
+          LAmnt: parseInt(loanAmount.value),
+          LAT: parseInt(loanAmountTerm.value),
+          CrHtry: parseInt(creditHistory.value),
+          PprAr: parseInt(propertyArea.value)
+        },
+        success: function(data) {
+          console.log(data);
+          eststatus.innerHTML = "<h2>" + data.loan_status.toString() + "</h2>";
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
